@@ -1,20 +1,21 @@
-import { CreateMessage } from './dto/create-message.dto';
 import { Injectable } from '@nestjs/common';
-import { Message } from './interface/message.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Message, MessageDocument } from './message.model';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class MessageService {
-  message: Message[] = [];
+  constructor(@InjectModel(Message.name) private messageModel: Model<MessageDocument>) {}
 
-  findAll(): Message[] {
-    return this.message;
+  async findAll(): Promise<Message[]> {
+    return await this.messageModel.find();
   }
 
-  findById(id: string): Message {
-    return this.message.find((message) => message.id == id);
-  }
+  // async findById(id: string): Promise<Message> {
+  //   return await this.messageModel.find((message) => message.id == id);
+  // }
 
-  create(newMessage: CreateMessage): Message {
-    return this.message.find((message) => message.id == newMessage.id);
-  }
+  // async create(newMessage: CreateMessage): Promise<Message> {
+  //   return await this.messageModel.find((message) => message.id == newMessage.id);
+  // }
 }

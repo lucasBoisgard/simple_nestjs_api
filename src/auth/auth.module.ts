@@ -1,7 +1,7 @@
 import { AuthService } from './provider/auth.service';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from '../user/schemas/user.schema';
+import { User, UserSchema } from '../user/user.model';
 import { AuthController } from './auth.controller';
 import { UserService } from 'src/user/user.service';
 import { PassportModule } from '@nestjs/passport';

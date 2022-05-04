@@ -1,8 +1,6 @@
-import { CreateRoom } from './dto/create-room.dto';
-// import { Room } from 'src/room/interfaces/room.interface';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Room, RoomDocument } from './schemas/room.schema';
+import { Room, RoomDocument } from './room.model';
 import { Model } from 'mongoose';
 
 @Injectable()
@@ -17,7 +15,7 @@ export class RoomService {
     return await this.roomModel.findById(id).exec();
   }
 
-  async create(newRoom: CreateRoom): Promise<Room> {
+  async create(newRoom: any): Promise<Room> {
     const createdRoom = new this.roomModel(newRoom);
     return createdRoom.save();
   }
